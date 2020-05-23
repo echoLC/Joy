@@ -1,26 +1,27 @@
-const koa = require('koa')
+const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const cors = require('@koa/cors')
 const config = require('./config/index')
+const koaBody = require('koa-body')
 
 // init .env
 require('dotenv').config()
 
-const app = new koa()
+const app = new Koa()
 
 /* resolve all api */
 const user = require('./api/user')
-
-/* set bodyparser middleware */
-app.use(bodyParser())
 
 /* set cors middleware */
 app.use(cors({
   credentials: true
 }))
 
+/* set bodyparser middleware */
+app.use(bodyParser())
+
 /* set all routes */
-app.use(user.routes()).use(user.allowedMethods())
+app.use(user.routes())
 
 /* set log middleware */
 app.use(async (ctx, next) => {
@@ -31,6 +32,7 @@ app.use(async (ctx, next) => {
 
   console.log(`${ctx.method} ${ctx.url} ${rt}ms`)
 })
+
 
 app.listen(config.port, () => {
   console.log('KOAN listening on port ' + config.port)

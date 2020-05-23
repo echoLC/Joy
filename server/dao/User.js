@@ -19,7 +19,9 @@ class UserDao {
     const user = new User()
     user.username = username
     user.phone = phone
-    user.password = password
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(password, salt) 
+    user.password = hash
     user.save()
 
     return {

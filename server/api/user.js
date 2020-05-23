@@ -8,32 +8,36 @@ const router = new Router({
 // 用户注册
 router.post('/register', async (ctx) => {
 
-  const { username, password, phone } = ctx.body
+  const { username, password, phone } = ctx.request.body
 
-  // 创建用户
-  const user = await User.create({
-    username,
-    password,
-    phone
-  })
-
-  // 返回结果
-  ctx.response.status = 200
-  ctx.body = res.json(user)
+  try {
+    // 创建用户
+    const user = await User.create({
+      username,
+      password,
+      phone
+    })
+    // 返回结果
+    ctx.response.status = 200
+    ctx.body = { code: 0, msg: null, data: user }
+  } catch (err) {
+    ctx.response.status = 200
+    ctx.body = { code: 1, msg: err.message }
+  }
 })
 
 router.post('/login', async ctx => {
-  const { phone, password } = ctx.body
+  const { phone, password } = ctx.request.body
     // 验证账号密码是否正确
     try {
       const user = await User.verify(phone, password)
       if (user) {
         ctx.response.status = 200
-        ctx.body = user
+        ctx.body = { code: 0, msg: null, data: user }
       }
     } catch (err) {
-      ctx.response.status = 500
-      ctx.body = { msg: err.message }
+      ctx.response.status = 200
+      ctx.body = { code: 1, msg: err.message }
     }
 })
 
