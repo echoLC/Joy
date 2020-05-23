@@ -3,10 +3,13 @@ const bodyParser = require('koa-bodyparser')
 const cors = require('@koa/cors')
 const config = require('./config/index')
 
+// init .env
+require('dotenv').config()
+
 const app = new koa()
 
-/* resolve all routes */
-const index = require('./routes/index')
+/* resolve all api */
+const user = require('./api/user')
 
 /* set bodyparser middleware */
 app.use(bodyParser())
@@ -17,7 +20,7 @@ app.use(cors({
 }))
 
 /* set all routes */
-app.use(index.routes()).use(index.allowedMethods())
+app.use(user.routes()).use(user.allowedMethods())
 
 /* set log middleware */
 app.use(async (ctx, next) => {
