@@ -3196,6 +3196,11 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+crypto-js@^3.1.9-1:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.3.0.tgz#846dd1cce2f68aacfa156c8578f926a609b7976b"
+  integrity sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q==
+
 css-color-names@0.0.4, css-color-names@^0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/css-color-names/-/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
@@ -3945,6 +3950,11 @@ es-to-primitive@^1.2.1:
     is-callable "^1.1.4"
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
+
+es6-promise@^4.2.8:
+  version "4.2.8"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.8.tgz#4eb21594c972bc40553d276e510539143db53e0a"
+  integrity sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -5268,6 +5278,11 @@ icss-utils@^4.0.0, icss-utils@^4.1.1:
   integrity sha512-4aFq7wvWyMHKgxsH8QQtGpvbASCf+eM3wPRLI6R+MgAnTCZ6STYsRvttLvRWK0Nfif5piF394St3HeJDaljGPA==
   dependencies:
     postcss "^7.0.14"
+
+idb-managed@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/idb-managed/-/idb-managed-1.0.9.tgz#51793bbbb2b35679066a0e58b7c8352c5b207822"
+  integrity sha512-dIAwla/WTVjGMELVFqjdakrcXzmUNoZym5sci662S74m7atGdeIRJaUM5b9P1impFIZghhcOkY+FYoVd6UB+Jg==
 
 ieee754@^1.1.4:
   version "1.1.13"
@@ -6719,6 +6734,15 @@ log-update@^1.0.2:
   dependencies:
     ansi-escapes "^1.0.0"
     cli-cursor "^1.0.2"
+
+logan-web@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/logan-web/-/logan-web-1.1.0.tgz#f1ef1975e94ace30214d7e0a80e8af2838380adb"
+  integrity sha512-3MNDs1wcfR+NYvFsjz5TUqBmR8Gmh+mK401XPNY5LG6DokoX1aZojpByIS/QbHCl1J2XsnTN9RF1b1JJJv+6jA==
+  dependencies:
+    crypto-js "^3.1.9-1"
+    es6-promise "^4.2.8"
+    idb-managed "^1.0.9"
 
 loglevel@^1.6.8:
   version "1.6.8"

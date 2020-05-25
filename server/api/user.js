@@ -42,7 +42,7 @@ router.post('/login', async ctx => {
 })
 
 router.get('/user', async ctx => {
-  const { id } = ctx.params.id
+  const { id } = ctx.params
 
   let userInfo = await User.detail(id)
 

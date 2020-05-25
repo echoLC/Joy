@@ -13,6 +13,7 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.13.2",
     "ky": "^0.20.0",
+    "logan-web": "^1.1.0",
     "url-search-params-polyfill": "^8.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",

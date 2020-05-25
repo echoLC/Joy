@@ -43,7 +43,7 @@ LogWebTask.init({
     comment: '日志状态：未分析过：1，已分析过：2'
   },
   update_time: {
-    type: DataTypes.timestamp,
+    type: DataTypes.BIGINT,
     comment: '更新时间'
   },
   custom_report_info: {
