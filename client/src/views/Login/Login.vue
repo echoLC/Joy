@@ -23,7 +23,18 @@
 </template>
 
 <script>
+/* service */
 import user from '@/service/user'
+
+/* utils */
+import {
+  mapMutations
+} from 'vuex'
+
+/* configs */
+import {
+  TOKEN_STORAGE_KEY
+} from '@/configs/Global'
 
 export default {
   name: 'Login',
@@ -39,14 +50,22 @@ export default {
   },
 
   methods: {
+    ...mapMutations({
+      setToken: 'SET_TOKEN'
+    }),
+
     async loginHandler () {
       try {
         const res = await user.login(this.loginInfo)
         if (res.code !== 0) {
           throw new Error(res.msg)
         }
+
+        // 存储token
+        this.setToken(res.token)
+
         this.$message.success('登陆成功')
-        this.$router.push('/about')
+        this.$router.push('/')
       } catch (err) {
         console.error(err.message)
         this.$message.error(err.message)
@@ -60,7 +79,7 @@ export default {
           throw new Error(res.msg)
         }
         this.$message.success('注册成功')
-        this.$router.push('/about')
+        this.$router.push('/')
       } catch (err) {
         console.error(err.message)
         this.$message.error(err.message)

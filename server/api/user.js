@@ -1,5 +1,7 @@
 const Router = require('koa-router')
 const User = require('../dao/User')
+const jwt = require('jsonwebtoken')
+const secret = require('../config/index').jwt.secret
 
 const router = new Router({
   prefix: '/api'
@@ -27,13 +29,19 @@ router.post('/register', async (ctx) => {
 })
 
 router.post('/login', async ctx => {
-  const { phone, password } = ctx.request.body
+  const { phone, password, username } = ctx.request.body
     // 验证账号密码是否正确
     try {
       const user = await User.verify(phone, password)
       if (user) {
+        // 生成token
+        const token = jwt.sign({
+          username,
+          phone
+        }, secret, { expiresIn: 8 * 60 * 60 })
+
         ctx.response.status = 200
-        ctx.body = { code: 0, msg: null, data: user }
+        ctx.body = { code: 0, msg: null, token }
       }
     } catch (err) {
       ctx.response.status = 200
@@ -42,13 +50,16 @@ router.post('/login', async ctx => {
 })
 
 router.get('/user', async ctx => {
-  const { id } = ctx.params
-
-  let userInfo = await User.detail(id)
-
   // 返回结果
+  const { username, phone } = ctx.state.user
   ctx.response.status = 200
-  ctx.body = res.json(userInfo)
+  ctx.body = {
+    code: 0,
+    data: {
+      username,
+      phone
+    }
+  }
 })
 
 module.exports = router

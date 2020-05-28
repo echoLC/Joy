@@ -9,6 +9,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import userApi from '@/service/user'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'Home',
@@ -17,8 +18,26 @@ export default {
   },
 
   async created () {
-    const user = await userApi.getUser()
-    console.log(user)
+    this.getUser()
+  },
+
+  methods: {
+    ...mapMutations({
+      setUserInfo: 'SET_USERINFO'
+    }),
+
+    async getUser () {
+      try {
+         const res = await userApi.getUser()
+         if (res.code !== 0) {
+           throw new Error(res.msg)
+         }
+         this.userInfo = res.data
+         this.setUserInfo(this.userInfo)
+      } catch (err) {
+        this.$messsage.success(err.message)
+      }
+    }
   },
 }
 </script>

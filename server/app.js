@@ -2,6 +2,11 @@ const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const cors = require('@koa/cors')
 const config = require('./config/index')
+const jwt = require('koa-jwt')
+const whiteList = require('./config/auth').whilteList
+
+// middlewares
+const authError = require('./middlewares/authError')
 
 // init .env
 require('dotenv').config()
@@ -19,6 +24,12 @@ app.use(cors({
 
 /* set bodyparser middleware */
 app.use(bodyParser())
+
+// 自定义处理auth错误
+app.use(authError())
+
+/* set jwt middlewares */
+app.use(jwt({ secret: config.jwt.secret }).unless({ path: whiteList }))
 
 /* set all routes */
 app.use(user.routes())

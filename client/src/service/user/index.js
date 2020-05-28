@@ -1,8 +1,8 @@
 import http from '../http'
 
 export default {
-  getUser (id) {
-    return http.get('user', { id })
+  getUser () {
+    return http.get('user')
   },
 
   login (data) {

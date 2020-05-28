@@ -1,5 +1,6 @@
 /* utils */
 import ky from './ky'
+import Store from '@/store'
 
 /* configs */
 import { API_BASE_URL } from '@/configs/Global'
@@ -16,7 +17,10 @@ export default ky.extend({
   hooks: {
     beforeRequest: [
       request => {
-        request.headers.set('Authorization', 'Bearer 123')
+        const token = Store.state.token
+        if (token) {
+          request.headers.set('Authorization', `Bearer ${token}`)
+        }
       }
     ],
     afterResponse: [
